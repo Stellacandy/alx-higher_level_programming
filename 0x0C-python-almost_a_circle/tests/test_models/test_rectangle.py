@@ -315,3 +315,88 @@ class TestRectangle_x(unittest.TestCase):
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
                 Rectangle(1, 2, memoryview(b'abcedfg'))
 
+    def test_inf_x(self):
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+                Rectangle(1, 2, float('inf'), 2)
+
+    def test_nan_x(self):
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+                Rectangle(1, 2, float('nan'), 2)
+
+    def test_negative_x(self):
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+                Rectangle(5, 3, -1, 0)
+
+
+class TestRectangle_y(unittest.TestCase):
+    """Unittests for testing initialization of Rectangle y attribute."""
+    
+    def test_None_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 3, None)
+
+    def test_str_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 1, "invalid")
+
+    def test_float_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 3, 5.5)
+
+    def test_complex_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 3, complex(5))
+
+    def test_dict_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 1, {"a": 1, "b": 2})
+
+    def test_list_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 1, [1, 2, 3])
+
+    def test_set_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 1, {1, 2, 3})
+
+    def test_tuple_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 1, (1, 2, 3))
+
+    def test_frozenset_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 3, frozenset({1, 2, 3, 1}))
+
+    def test_range_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 3, range(5))
+
+    def test_bytes_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 3, b'Python')
+
+    def test_bytearray_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 3, bytearray(b'abcdefg'))
+
+
+    def test_memoryview_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 3, memoryview(b'abcedfg'))
+
+    def test_inf_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 1, float('inf'))
+
+    def test_nan_y(self):
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                Rectangle(1, 2, 1, float('nan'))
+
+    def test_negative_y(self):
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+                Rectangle(3, 5, 0, -1)
+
+
+class TestRectangle_order_of_initialization(unittest.TestCase):
+    """Unittests for testing Rectangle order of attribute initialization."""
+
